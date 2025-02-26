@@ -27,7 +27,6 @@ COPY . .
 RUN echo "Build time environment:" && \
     echo "NEXT_PUBLIC_API_BASE_URL: $NEXT_PUBLIC_API_BASE_URL"
     # echo "NEXT_PUBLIC_CHANNEL_ID: $NEXT_PUBLIC_CHANNEL_ID"
-
 # Build the Next.js application
 RUN npm run build
 
