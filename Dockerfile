@@ -1,4 +1,4 @@
-x# Use an official Node.js image based on Alpine Linux
+# Use an official Node.js image based on Alpine Linux
 FROM node:20
 
 # Set working directory
