@@ -56,9 +56,11 @@ jobs:
           --build-arg NEXT_PUBLIC_CHANNEL_ID="${NEXT_PUBLIC_CHANNEL_ID}" \
           --build-arg NEXT_PUBLIC_CHANNEL_SECRET="${NEXT_PUBLIC_CHANNEL_SECRET}" \
            --build-arg NEXT_PUBLIC_CRYPTO_KEY="${NEXT_PUBLIC_CRYPTO_KEY}" \
-          -t ${{ env.IMAGE_NAME }}:${{ github.sha }} .
+          -t ${{ env.IMAGE_NAME }}:latest .
+
+         # docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.IMAGE_NAME }}:${{ steps.set_env.outputs.image_tag }}
         
-         docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.IMAGE_NAME }}:${{ steps.set_env.outputs.image_tag }}
+         # docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.IMAGE_NAME }}:${{ steps.set_env.outputs.image_tag }}
   deploy:
     needs: build
     runs-on: self-hosted
@@ -86,7 +88,7 @@ jobs:
           --name "${{ needs.build.outputs.container_name }}" \
           -p ${{ needs.build.outputs.port }} \
           --env-file "${{ needs.build.outputs.env_file }}" \
-          ${{ env.IMAGE_NAME }}:${{ needs.build.outputs.image_tag }}
+          ${{ env.IMAGE_NAME }}:latest
         
         # Verify the environment variables
         echo "Verifying environment variables in container:"
